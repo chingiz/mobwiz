@@ -87,18 +87,6 @@ func RunInteractiveFlow(embeddedFS fs.FS) (config.Config, error) {
 		cfg.Project.PackageName = packageName
 	}
 
-	// 5. State Management (for Flutter)
-	if platform == "Flutter" {
-		smPrompt := promptui.Select{
-			Label: "State management",
-			Items: []string{"BLoC", "Riverpod", "Provider", "GetX"},
-		}
-		_, sm, err := smPrompt.Run()
-		if err != nil {
-			return cfg, err
-		}
-		cfg.Options.StateManagement = sm
-	}
 
 	// 6. Features (Simplified for now, just yes/no for common ones)
 	cfg.Options.IncludeTests = true

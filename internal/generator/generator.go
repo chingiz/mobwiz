@@ -3,6 +3,7 @@ package generator
 import (
 	"fmt"
 	"io/fs"
+	"path/filepath"
 	"github.com/chingiz/mobwiz/internal/config"
 )
 
@@ -50,6 +51,14 @@ func GenerateModule(cfg config.Config, embeddedFS fs.FS) error {
 		if err != nil {
 			return fmt.Errorf("failed to render path %s: %w", tmplDef.OutputPath, err)
 		}
+
+		// Prepend module name folder (snake_case)
+		// We use the engine to render "{{snakeCase .Name}}" to get consistent naming
+		moduleFolder, err := engine.Render("{{snakeCase .Name}}", data)
+		if err != nil {
+			return fmt.Errorf("failed to render module folder name: %w", err)
+		}
+		path = filepath.Join(moduleFolder, path)
 
 		// Render content
 		renderedContent, err := engine.Render(content, data)
