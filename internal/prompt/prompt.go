@@ -2,10 +2,10 @@ package prompt
 
 import (
 	"errors"
-	"io/fs"
-	"github.com/manifoldco/promptui"
 	"github.com/chingiz/mobwiz/internal/config"
 	"github.com/chingiz/mobwiz/internal/generator"
+	"github.com/manifoldco/promptui"
+	"io/fs"
 )
 
 // RunInteractiveFlow gathers user input for module creation
@@ -86,7 +86,6 @@ func RunInteractiveFlow(embeddedFS fs.FS) (config.Config, error) {
 		}
 		cfg.Project.PackageName = packageName
 	}
-
 
 	// 6. Features (Simplified for now, just yes/no for common ones)
 	cfg.Options.IncludeTests = true

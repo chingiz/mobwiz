@@ -3,12 +3,12 @@ package generator
 import (
 	"bytes"
 	"fmt"
+	"github.com/Masterminds/sprig/v3"
+	"github.com/chingiz/mobwiz/internal/config"
 	"os"
 	"path/filepath"
 	"strings"
 	"text/template"
-	"github.com/Masterminds/sprig/v3"
-	"github.com/chingiz/mobwiz/internal/config"
 )
 
 // Engine handles template rendering
@@ -27,11 +27,11 @@ func (e *Engine) Render(tmplContent string, data interface{}) (string, error) {
 	// We also add a custom "pascalCase" helper if sprig doesn't have it exactly as we want,
 	// but sprig has "CamelCase" which is usually PascalCase.
 	// Let's alias some common ones to match the guide's {{snakeCase}} style.
-	
+
 	funcMap := sprig.TxtFuncMap()
 	funcMap["snakeCase"] = sprig.TxtFuncMap()["snakecase"]
 	funcMap["pascalCase"] = sprig.TxtFuncMap()["camelcase"] // Sprig's camelcase is actually PascalCase (e.g. "foo_bar" -> "FooBar")
-	funcMap["camelCase"] = sprig.TxtFuncMap()["camelcase"] // Just in case
+	funcMap["camelCase"] = sprig.TxtFuncMap()["camelcase"]  // Just in case
 	// Add custom function to convert package name to path (e.g. com.example -> com/example)
 	funcMap["packagePath"] = func(packageName string) string {
 		return filepath.ToSlash(filepath.Join(strings.Split(packageName, ".")...))

@@ -31,7 +31,7 @@ var createCmd = &cobra.Command{
 			cfg.Options.StateManagement = "BLoC"
 			cfg.Options.IncludeTests = true
 			cfg.Options.IncludeDI = true
-			
+
 			// Set package name for Android (default to com.example if not provided)
 			if platform == "Android (Kotlin)" || platform == "Android" {
 				if packageName == "" {

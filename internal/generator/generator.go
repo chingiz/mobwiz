@@ -2,15 +2,15 @@ package generator
 
 import (
 	"fmt"
+	"github.com/chingiz/mobwiz/internal/config"
 	"io/fs"
 	"path/filepath"
-	"github.com/chingiz/mobwiz/internal/config"
 )
 
 // GenerateModule generates the files for a module based on configuration
 func GenerateModule(cfg config.Config, embeddedFS fs.FS) error {
 	engine := NewEngine(cfg)
-	
+
 	// Load template configuration
 	tmplConfig, err := LoadTemplatesConfig(embeddedFS)
 	if err != nil {

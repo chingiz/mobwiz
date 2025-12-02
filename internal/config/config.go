@@ -9,8 +9,8 @@ type ProjectConfig struct {
 
 // ModuleConfig represents the module definition
 type ModuleConfig struct {
-	Name      string                 `yaml:"name"`
-	Type      string                 `yaml:"type"`
+	Name      string                    `yaml:"name"`
+	Type      string                    `yaml:"type"`
 	Structure map[string]PlatformConfig `yaml:"structure"`
 }
 
@@ -23,10 +23,10 @@ type PlatformConfig struct {
 
 // Config holds the full configuration
 type Config struct {
-	Project      ProjectConfig     `yaml:"project"`
-	Module       ModuleConfig      `yaml:"module"`
+	Project      ProjectConfig       `yaml:"project"`
+	Module       ModuleConfig        `yaml:"module"`
 	Dependencies map[string][]string `yaml:"dependencies"`
-	Options      Options           `yaml:"options"`
+	Options      Options             `yaml:"options"`
 }
 
 type Options struct {

@@ -1,5 +1,14 @@
 # MobWiz
 
+<p align="center">
+  <img src="https://img.shields.io/github/go-mod/go-version/chingiz/mobwiz?style=flat-square&logo=go" alt="Go Version">
+  <img src="https://github.com/chingiz/mobwiz/actions/workflows/go.yml/badge.svg" alt="CI Status">
+  <img src="https://goreportcard.com/badge/github.com/chingiz/mobwiz?style=flat-square" alt="Go Report Card">
+  <img src="https://img.shields.io/github/license/chingiz/mobwiz?style=flat-square" alt="License">
+  <img src="https://img.shields.io/badge/platforms-Android%20%7C%20Flutter%20%7C%20iOS-blue?style=flat-square" alt="Platforms">
+  <img src="https://img.shields.io/badge/made%20with-%E2%9D%A4-red?style=flat-square" alt="Made with Love">
+</p>
+
 > A batteries-included CLI that scaffolds production-ready mobile modules for Android, Flutter, and iOS using consistent architectural patterns.
 
 MobWiz streamlines the tedious parts of module creation: it asks a few high-level questions (or accepts flags), picks the right template, and writes all the boilerplate for data, domain, and presentation layers. The result is a predictable module tree that mirrors the architecture standards your team already uses.

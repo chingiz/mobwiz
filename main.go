@@ -10,6 +10,6 @@ var embeddedTemplates embed.FS
 
 func main() {
 	// Pass the embedded filesystem to the command execution
-	
+
 	cmd.Execute(embeddedTemplates)
 }

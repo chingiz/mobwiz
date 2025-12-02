@@ -2,11 +2,11 @@ package generator
 
 import (
 	"fmt"
+	"gopkg.in/yaml.v3"
 	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
-	"gopkg.in/yaml.v3"
 )
 
 // TemplateConfig represents the structure of templates.yaml
@@ -33,10 +33,10 @@ func LoadTemplatesConfig(embeddedFS fs.FS) (*TemplateConfig, error) {
 	}
 
 	configPath := ""
-	
+
 	// 1. Check working directory and parents
 	searchPaths := []string{wd}
-	
+
 	// 2. Check executable directory
 	exe, err := os.Executable()
 	if err == nil {
@@ -91,13 +91,13 @@ func LoadTemplate(platform, architecture, templateFile string, embeddedFS fs.FS)
 	if err != nil {
 		return "", err
 	}
-	
+
 	// Check if running from test_output subdirectory or similar
 	// Look for templates in parent directories up to 3 levels
-	
+
 	// 1. Check working directory and parents
 	searchPaths := []string{wd}
-	
+
 	// 2. Check executable directory
 	exe, err := os.Executable()
 	if err == nil {
@@ -122,7 +122,7 @@ func LoadTemplate(platform, architecture, templateFile string, embeddedFS fs.FS)
 			break
 		}
 	}
-	
+
 	if templatePath != "" {
 		content, err := os.ReadFile(templatePath)
 		if err != nil {
@@ -138,7 +138,7 @@ func LoadTemplate(platform, architecture, templateFile string, embeddedFS fs.FS)
 			return string(content), nil
 		}
 	}
-	
+
 	return "", fmt.Errorf("template not found: %s/%s/%s", platform, architecture, templateFile)
 }
 
