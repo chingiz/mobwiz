@@ -1,0 +1,13 @@
+package {{.PackageName}}.{{snakeCase .Name}}.domain.usecases
+
+import {{.PackageName}}.{{snakeCase .Name}}.domain.models.{{pascalCase .Name}}
+import {{.PackageName}}.{{snakeCase .Name}}.domain.repository.{{pascalCase .Name}}Repository
+import javax.inject.Inject
+
+class Get{{pascalCase .Name}}UseCase @Inject constructor(
+    private val repository: {{pascalCase .Name}}Repository
+) {
+    suspend operator fun invoke(): Result<{{pascalCase .Name}}> {
+        return repository.get{{pascalCase .Name}}()
+   }
+}

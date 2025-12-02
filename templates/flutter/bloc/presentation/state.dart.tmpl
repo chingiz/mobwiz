@@ -1,0 +1,19 @@
+part of '{{snakeCase .Name}}_bloc.dart';
+
+abstract class {{pascalCase .Name}}State extends Equatable {
+  const {{pascalCase .Name}}State();
+  
+  @override
+  List<Object> get props => [];
+}
+
+class {{pascalCase .Name}}Initial extends {{pascalCase .Name}}State {}
+class {{pascalCase .Name}}Loading extends {{pascalCase .Name}}State {}
+class {{pascalCase .Name}}Loaded extends {{pascalCase .Name}}State {
+  final {{pascalCase .Name}} data;
+  const {{pascalCase .Name}}Loaded({required this.data});
+}
+class {{pascalCase .Name}}Error extends {{pascalCase .Name}}State {
+  final String message;
+  const {{pascalCase .Name}}Error({required this.message});
+}

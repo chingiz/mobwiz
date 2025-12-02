@@ -1,0 +1,9 @@
+package {{snakeCase .Name}}.domain.repositories;
+
+import 'package:dartz/dartz.dart';
+import '../../../../core/error/failures.dart';
+import '../entities/{{snakeCase .Name}}_entity.dart';
+
+abstract class {{pascalCase .Name}}Repository {
+  Future<Either<Failure, {{pascalCase .Name}}>> get{{pascalCase .Name}}();
+}

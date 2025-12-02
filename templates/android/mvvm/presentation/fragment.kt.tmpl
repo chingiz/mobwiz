@@ -1,0 +1,61 @@
+package {{.PackageName}}.{{snakeCase .Name}}.presentation.ui
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import {{.PackageName}}.{{snakeCase .Name}}.presentation.viewmodel.{{pascalCase .Name}}UiState
+import {{.PackageName}}.{{snakeCase .Name}}.presentation.viewmodel.{{pascalCase .Name}}ViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+
+@AndroidEntryPoint
+class {{pascalCase .Name}}Fragment : Fragment() {
+
+    private val viewModel: {{pascalCase .Name}}ViewModel by viewModels()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // TODO: Inflate your layout
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeState()
+    }
+
+    private fun observeState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    when (state) {
+                        is {{pascalCase .Name}}UiState.Loading -> showLoading()
+                        is {{pascalCase .Name}}UiState.Success -> showSuccess(state.data)
+                        is {{pascalCase .Name}}UiState.Error -> showError(state.message)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showLoading() {
+        // TODO: Show loading state
+    }
+
+    private fun showSuccess(data: {{.PackageName}}.{{snakeCase .Name}}.domain.models.{{pascalCase .Name}}) {
+        // TODO: Show success state with data
+    }
+
+    private fun showError(message: String) {
+        // TODO: Show error state
+    }
+}

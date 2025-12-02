@@ -1,0 +1,29 @@
+package {{.PackageName}}.{{snakeCase .Name}}.data.repository
+
+import {{.PackageName}}.{{snakeCase .Name}}.data.local.{{pascalCase .Name}}Dao
+import {{.PackageName}}.{{snakeCase .Name}}.data.remote.{{pascalCase .Name}}ApiService
+import {{.PackageName}}.{{snakeCase .Name}}.domain.models.{{pascalCase .Name}}
+import {{.PackageName}}.{{snakeCase .Name}}.domain.repository.{{pascalCase .Name}}Repository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+
+class {{pascalCase .Name}}RepositoryImpl @Inject constructor(
+    private val apiService: {{pascalCase .Name}}ApiService,
+    private val dao: {{pascalCase .Name}}Dao
+) : {{pascalCase .Name}}Repository {
+
+    override suspend fun get{{pascalCase .Name}}(): Result<{{pascalCase .Name}}> {
+        return try {
+            val response = apiService.get{{pascalCase .Name}}()
+            dao.insert(response)
+            Result.success(response.toDomain())
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    override fun observe{{pascalCase .Name}}(): Flow<{{pascalCase .Name}}> {
+        return dao.observe{{pascalCase .Name}}().map { it?.toDomain() ?: {{pascalCase .Name}}(id = "") }
+    }
+}

@@ -1,0 +1,9 @@
+package {{.PackageName}}.{{snakeCase .Name}}.domain.repository
+
+import {{.PackageName}}.{{snakeCase .Name}}.domain.models.{{pascalCase .Name}}
+import kotlinx.coroutines.flow.Flow
+
+interface {{pascalCase .Name}}Repository {
+    suspend fun get{{pascalCase .Name}}(): Result<{{pascalCase .Name}}>
+    fun observe{{pascalCase .Name}}(): Flow<{{pascalCase .Name}}>
+}

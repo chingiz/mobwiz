@@ -1,0 +1,17 @@
+package {{.PackageName}}.{{snakeCase .Name}}.data.local
+
+import androidx.room.*
+import {{.PackageName}}.{{snakeCase .Name}}.data.models.{{pascalCase .Name}}Model
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface {{pascalCase .Name}}Dao {
+    @Query("SELECT * FROM {{snakeCase .Name}}")
+    fun observe{{pascalCase .Name}}(): Flow<{{pascalCase .Name}}Model?>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(item: {{pascalCase .Name}}Model)
+
+    @Query("DELETE FROM {{snakeCase .Name}}")
+    suspend fun deleteAll()
+}

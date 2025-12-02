@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../bloc/{{snakeCase .Name}}_bloc.dart';
+import '../../../../core/di/injection_container.dart'; // Assumed DI setup
+
+class {{pascalCase .Name}}Page extends StatelessWidget {
+  const {{pascalCase .Name}}Page({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => sl<{{pascalCase .Name}}Bloc>()..add(Load{{pascalCase .Name}}Event()),
+      child: Scaffold(
+        appBar: AppBar(title: const Text('{{pascalCase .Name}}')),
+        body: BlocBuilder<{{pascalCase .Name}}Bloc, {{pascalCase .Name}}State>(
+          builder: (context, state) {
+            if (state is {{pascalCase .Name}}Loading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is {{pascalCase .Name}}Loaded) {
+              return Center(child: Text('Data: ${state.data.id}'));
+            } else if (state is {{pascalCase .Name}}Error) {
+              return Center(child: Text(state.message));
+            }
+            return const SizedBox();
+          },
+        ),
+      ),
+    );
+  }
+}

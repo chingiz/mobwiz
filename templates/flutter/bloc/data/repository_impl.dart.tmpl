@@ -1,0 +1,14 @@
+package {{snakeCase .Name}}.data.repositories;
+
+import 'package:dartz/dartz.dart';
+import '../../../../core/error/failures.dart';
+import '../../domain/entities/{{snakeCase .Name}}_entity.dart';
+import '../../domain/repositories/{{snakeCase .Name}}_repository.dart';
+
+class {{pascalCase .Name}}RepositoryImpl implements {{pascalCase .Name}}Repository {
+  @override
+  Future<Either<Failure, {{pascalCase .Name}}>> get{{pascalCase .Name}}() async {
+    // TODO: Implement actual data fetching
+    return Right({{pascalCase .Name}}(id: '1'));
+  }
+}

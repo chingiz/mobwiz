@@ -1,0 +1,41 @@
+import UIKit
+import SwiftUI
+
+protocol {{pascalCase .Name}}CoordinatorProtocol {
+    func start()
+    func navigate(to route: {{pascalCase .Name}}Route)
+}
+
+enum {{pascalCase .Name}}Route {
+    case detail({{pascalCase .Name}})
+}
+
+class {{pascalCase .Name}}Coordinator: {{pascalCase .Name}}CoordinatorProtocol {
+    private let navigationController: UINavigationController
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+    
+    func start() {
+        // TODO: Setup dependencies
+        let repository = {{pascalCase .Name}}RepositoryImpl(
+            service: {{pascalCase .Name}}Service(),
+            storage: {{pascalCase .Name}}Storage()
+        )
+        let useCase = Get{{pascalCase .Name}}UseCase(repository: repository)
+        let viewModel = {{pascalCase .Name}}ViewModel(get{{pascalCase .Name}}UseCase: useCase)
+        let view = {{pascalCase .Name}}View(viewModel: viewModel)
+        let hostingController = UIHostingController(rootView: view)
+        
+        navigationController.pushViewController(hostingController, animated: true)
+    }
+    
+    func navigate(to route: {{pascalCase .Name}}Route) {
+        switch route {
+        case .detail(let item):
+            // TODO: Navigate to detail view
+            break
+        }
+    }
+}

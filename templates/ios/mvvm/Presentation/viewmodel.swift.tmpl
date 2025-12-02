@@ -1,0 +1,31 @@
+import Foundation
+import Combine
+
+@MainActor
+class {{pascalCase .Name}}ViewModel: ObservableObject {
+    @Published var state: {{pascalCase .Name}}ViewState = .loading
+    
+    private let get{{pascalCase .Name}}UseCase: Get{{pascalCase .Name}}UseCaseProtocol
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(get{{pascalCase .Name}}UseCase: Get{{pascalCase .Name}}UseCaseProtocol) {
+        self.get{{pascalCase .Name}}UseCase = get{{pascalCase .Name}}UseCase
+    }
+    
+    func load() async {
+        state = .loading
+        
+        do {
+            let data = try await get{{pascalCase .Name}}UseCase.execute()
+            state = .loaded(data)
+        } catch {
+            state = .error(error.localizedDescription)
+        }
+    }
+}
+
+enum {{pascalCase .Name}}ViewState: Equatable {
+    case loading
+    case loaded({{pascalCase .Name}})
+    case error(String)
+}

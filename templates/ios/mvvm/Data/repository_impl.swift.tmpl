@@ -1,0 +1,25 @@
+import Foundation
+import Combine
+
+class {{pascalCase .Name}}RepositoryImpl: {{pascalCase .Name}}Repository {
+    private let service: {{pascalCase .Name}}ServiceProtocol
+    private let storage: {{pascalCase .Name}}StorageProtocol
+    
+    init(service: {{pascalCase .Name}}ServiceProtocol, storage: {{pascalCase .Name}}StorageProtocol) {
+        self.service = service
+        self.storage = storage
+    }
+    
+    func get{{pascalCase .Name}}() async throws -> {{pascalCase .Name}} {
+        let dto = try await service.fetch{{pascalCase .Name}}()
+        try storage.save(dto)
+        return dto.toDomain()
+    }
+    
+    func observe{{pascalCase .Name}}() -> AnyPublisher<{{pascalCase .Name}}, Error> {
+        return storage.observe()
+            .compactMap { $0?.toDomain() }
+            .setFailureType(to: Error.self)
+            .eraseToAnyPublisher()
+    }
+}

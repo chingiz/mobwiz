@@ -1,0 +1,10 @@
+part of '{{snakeCase .Name}}_bloc.dart';
+
+abstract class {{pascalCase .Name}}Event extends Equatable {
+  const {{pascalCase .Name}}Event();
+
+  @override
+  List<Object> get props => [];
+}
+
+class Load{{pascalCase .Name}}Event extends {{pascalCase .Name}}Event {}

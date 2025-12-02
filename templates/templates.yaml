@@ -1,0 +1,71 @@
+android:
+  mvvm:
+    domain:
+      - path: "domain/models/{{pascalCase .Name}}.kt"
+        template: "domain/model.kt.tmpl"
+      - path: "domain/repository/{{pascalCase .Name}}Repository.kt"
+        template: "domain/repository.kt.tmpl"
+      - path: "domain/usecases/Get{{pascalCase .Name}}UseCase.kt"
+        template: "domain/usecase.kt.tmpl"
+    data:
+      - path: "data/models/{{pascalCase .Name}}Model.kt"
+        template: "data/model.kt.tmpl"
+      - path: "data/remote/{{pascalCase .Name}}ApiService.kt"
+        template: "data/api_service.kt.tmpl"
+      - path: "data/local/{{pascalCase .Name}}Dao.kt"
+        template: "data/dao.kt.tmpl"
+      - path: "data/repository/{{pascalCase .Name}}RepositoryImpl.kt"
+        template: "data/repository_impl.kt.tmpl"
+    presentation:
+      - path: "presentation/viewmodel/{{pascalCase .Name}}ViewModel.kt"
+        template: "presentation/viewmodel.kt.tmpl"
+      - path: "presentation/ui/{{pascalCase .Name}}Fragment.kt"
+        template: "presentation/fragment.kt.tmpl"
+
+flutter:
+  bloc:
+    domain:
+      - path: "domain/entities/{{snakeCase .Name}}_entity.dart"
+        template: "domain/entity.dart.tmpl"
+      - path: "domain/repositories/{{snakeCase .Name}}_repository.dart"
+        template: "domain/repository.dart.tmpl"
+      - path: "domain/usecases/get_{{snakeCase .Name}}.dart"
+        template: "domain/usecase.dart.tmpl"
+    data:
+      - path: "data/repositories/{{snakeCase .Name}}_repository_impl.dart"
+        template: "data/repository_impl.dart.tmpl"
+    presentation:
+      - path: "presentation/bloc/{{snakeCase .Name}}_bloc.dart"
+        template: "presentation/bloc.dart.tmpl"
+      - path: "presentation/bloc/{{snakeCase .Name}}_event.dart"
+        template: "presentation/event.dart.tmpl"
+      - path: "presentation/bloc/{{snakeCase .Name}}_state.dart"
+        template: "presentation/state.dart.tmpl"
+      - path: "presentation/pages/{{snakeCase .Name}}_page.dart"
+        template: "presentation/page.dart.tmpl"
+
+ios:
+  mvvm:
+    Domain:
+      - path: "Domain/Entities/{{pascalCase .Name}}.swift"
+        template: "Domain/entity.swift.tmpl"
+      - path: "Domain/Repositories/{{pascalCase .Name}}Repository.swift"
+        template: "Domain/repository.swift.tmpl"
+      - path: "Domain/UseCases/Get{{pascalCase .Name}}UseCase.swift"
+        template: "Domain/usecase.swift.tmpl"
+    Data:
+      - path: "Data/Models/{{pascalCase .Name}}DTO.swift"
+        template: "Data/dto.swift.tmpl"
+      - path: "Data/Network/{{pascalCase .Name}}Service.swift"
+        template: "Data/service.swift.tmpl"
+      - path: "Data/Local/{{pascalCase .Name}}Storage.swift"
+        template: "Data/storage.swift.tmpl"
+      - path: "Data/Repository/{{pascalCase .Name}}RepositoryImpl.swift"
+        template: "Data/repository_impl.swift.tmpl"
+    Presentation:
+      - path: "Presentation/ViewModels/{{pascalCase .Name}}ViewModel.swift"
+        template: "Presentation/viewmodel.swift.tmpl"
+      - path: "Presentation/Views/{{pascalCase .Name}}View.swift"
+        template: "Presentation/view.swift.tmpl"
+      - path: "Presentation/Coordinators/{{pascalCase .Name}}Coordinator.swift"
+        template: "Presentation/coordinator.swift.tmpl"

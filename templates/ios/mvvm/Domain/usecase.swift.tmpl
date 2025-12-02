@@ -1,0 +1,18 @@
+import Foundation
+import Combine
+
+protocol Get{{pascalCase .Name}}UseCaseProtocol {
+    func execute() async throws -> {{pascalCase .Name}}
+}
+
+class Get{{pascalCase .Name}}UseCase: Get{{pascalCase .Name}}UseCaseProtocol {
+    private let repository: {{pascalCase .Name}}Repository
+    
+    init(repository: {{pascalCase .Name}}Repository) {
+        self.repository = repository
+    }
+    
+    func execute() async throws -> {{pascalCase .Name}} {
+        return try await repository.get{{pascalCase .Name}}()
+    }
+}

@@ -1,0 +1,33 @@
+import Foundation
+import Combine
+
+protocol {{pascalCase .Name}}StorageProtocol {
+    func save(_ item: {{pascalCase .Name}}DTO) throws
+    func fetch() throws -> {{pascalCase .Name}}DTO?
+    func observe() -> AnyPublisher<{{pascalCase .Name}}DTO?, Never>
+}
+
+class {{pascalCase .Name}}Storage: {{pascalCase .Name}}StorageProtocol {
+    private let userDefaults: UserDefaults
+    private let key = "{{snakeCase .Name}}_storage_key"
+    private let subject = CurrentValueSubject<{{pascalCase .Name}}DTO?, Never>(nil)
+    
+    init(userDefaults: UserDefaults = .standard) {
+        self.userDefaults = userDefaults
+    }
+    
+    func save(_ item: {{pascalCase .Name}}DTO) throws {
+        let data = try JSONEncoder().encode(item)
+        userDefaults.set(data, forKey: key)
+        subject.send(item)
+    }
+    
+    func fetch() throws -> {{pascalCase .Name}}DTO? {
+        guard let data = userDefaults.data(forKey: key) else { return nil }
+        return try JSONDecoder().decode({{pascalCase .Name}}DTO.self, from: data)
+    }
+    
+    func observe() -> AnyPublisher<{{pascalCase .Name}}DTO?, Never> {
+        return subject.eraseToAnyPublisher()
+    }
+}

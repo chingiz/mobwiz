@@ -1,0 +1,38 @@
+# Build artifacts
+/mobwiz
+/bin/
+/build/
+/dist/
+/out/
+
+# Go binaries & shared libs
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binaries & coverage
+*.test
+*.out
+coverage.*
+
+# Dependency/vendor output
+/vendor/
+
+# Editor settings
+.idea/
+*.iml
+.vscode/
+
+# macOS cruft
+.DS_Store
+
+# Temporary files
+tmp/
+*.tmp
+
+# Go workspace file
+go.work
+
+

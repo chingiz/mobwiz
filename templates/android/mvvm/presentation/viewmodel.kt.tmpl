@@ -1,0 +1,44 @@
+package {{.PackageName}}.{{snakeCase .Name}}.presentation.viewmodel
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import {{.PackageName}}.{{snakeCase .Name}}.domain.models.{{pascalCase .Name}}
+import {{.PackageName}}.{{snakeCase .Name}}.domain.usecases.Get{{pascalCase .Name}}UseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class {{pascalCase .Name}}ViewModel @Inject constructor(
+    private val get{{pascalCase .Name}}UseCase: Get{{pascalCase .Name}}UseCase
+) : ViewModel() {
+
+    private val _uiState = MutableStateFlow<{{pascalCase .Name}}UiState>({{pascalCase .Name}}UiState.Loading)
+    val uiState: StateFlow<{{pascalCase .Name}}UiState> = _uiState.asStateFlow()
+
+    init {
+        load{{pascalCase .Name}}()
+    }
+
+    fun load{{pascalCase .Name}}() {
+        viewModelScope.launch {
+            _uiState.value = {{pascalCase .Name}}UiState.Loading
+            get{{pascalCase .Name}}UseCase()
+                .onSuccess { data ->
+                    _uiState.value = {{pascalCase .Name}}UiState.Success(data)
+                }
+                .onFailure { error ->
+                    _uiState.value = {{pascalCase .Name}}UiState.Error(error.message ?: "Unknown error")
+                }
+        }
+    }
+}
+
+sealed class {{pascalCase .Name}}UiState {
+    object Loading : {{pascalCase .Name}}UiState()
+    data class Success(val data: {{pascalCase .Name}}) : {{pascalCase .Name}}UiState()
+    data class Error(val message: String) : {{pascalCase .Name}}UiState()
+}

@@ -1,0 +1,9 @@
+package {{.PackageName}}.{{snakeCase .Name}}.data.models
+
+import {{.PackageName}}.{{snakeCase .Name}}.domain.models.{{pascalCase .Name}}
+
+data class {{pascalCase .Name}}Model(
+    val id: String
+) {
+    fun toDomain(): {{pascalCase .Name}} = {{pascalCase .Name}}(id = id)
+}

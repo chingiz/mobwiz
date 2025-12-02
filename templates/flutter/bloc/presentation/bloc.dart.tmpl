@@ -1,0 +1,27 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:equatable/equatable.dart';
+import '../../domain/entities/{{snakeCase .Name}}_entity.dart';
+import '../../domain/usecases/get_{{snakeCase .Name}}.dart';
+
+part '{{snakeCase .Name}}_event.dart';
+part '{{snakeCase .Name}}_state.dart';
+
+class {{pascalCase .Name}}Bloc extends Bloc<{{pascalCase .Name}}Event, {{pascalCase .Name}}State> {
+  final Get{{pascalCase .Name}} get{{pascalCase .Name}};
+
+  {{pascalCase .Name}}Bloc({required this.get{{pascalCase .Name}}}) : super({{pascalCase .Name}}Initial()) {
+    on<Load{{pascalCase .Name}}Event>(_onLoad{{pascalCase .Name}});
+  }
+
+  Future<void> _onLoad{{pascalCase .Name}}(
+    Load{{pascalCase .Name}}Event event,
+    Emitter<{{pascalCase .Name}}State> emit,
+  ) async {
+    emit({{pascalCase .Name}}Loading());
+    final result = await get{{pascalCase .Name}}();
+    result.fold(
+      (failure) => emit({{pascalCase .Name}}Error(message: "Error")),
+      (data) => emit({{pascalCase .Name}}Loaded(data: data)),
+    );
+  }
+}

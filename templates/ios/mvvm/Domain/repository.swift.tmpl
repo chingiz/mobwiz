@@ -1,0 +1,7 @@
+import Foundation
+import Combine
+
+protocol {{pascalCase .Name}}Repository {
+    func get{{pascalCase .Name}}() async throws -> {{pascalCase .Name}}
+    func observe{{pascalCase .Name}}() -> AnyPublisher<{{pascalCase .Name}}, Error>
+}

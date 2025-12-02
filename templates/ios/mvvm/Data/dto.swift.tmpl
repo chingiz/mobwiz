@@ -1,0 +1,9 @@
+import Foundation
+
+struct {{pascalCase .Name}}DTO: Codable {
+    let id: String
+    
+    func toDomain() -> {{pascalCase .Name}} {
+        return {{pascalCase .Name}}(id: id)
+    }
+}

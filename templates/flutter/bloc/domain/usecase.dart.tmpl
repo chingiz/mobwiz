@@ -1,0 +1,16 @@
+package {{snakeCase .Name}}.domain.usecases;
+
+import 'package:dartz/dartz.dart';
+import '../../../../core/error/failures.dart';
+import '../entities/{{snakeCase .Name}}_entity.dart';
+import '../repositories/{{snakeCase .Name}}_repository.dart';
+
+class Get{{pascalCase .Name}} {
+  final {{pascalCase .Name}}Repository repository;
+
+  Get{{pascalCase .Name}}(this.repository);
+
+  Future<Either<Failure, {{pascalCase .Name}}>> call() async {
+    return await repository.get{{pascalCase .Name}}();
+  }
+}

@@ -1,0 +1,12 @@
+package {{snakeCase .Name}}.domain.entities;
+
+import 'package:equatable/equatable.dart';
+
+class {{pascalCase .Name}} extends Equatable {
+  final String id;
+
+  const {{pascalCase .Name}}({required this.id});
+
+  @override
+  List<Object> get props => [id];
+}

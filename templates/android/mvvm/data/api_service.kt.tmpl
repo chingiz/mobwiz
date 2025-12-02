@@ -1,0 +1,9 @@
+package {{.PackageName}}.{{snakeCase .Name}}.data.remote
+
+import {{.PackageName}}.{{snakeCase .Name}}.data.models.{{pascalCase .Name}}Model
+import retrofit2.http.GET
+
+interface {{pascalCase .Name}}ApiService {
+    @GET("{{snakeCase .Name}}")
+    suspend fun get{{pascalCase .Name}}(): {{pascalCase .Name}}Model
+}
