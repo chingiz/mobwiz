@@ -2,9 +2,10 @@ package generator
 
 import (
 	"fmt"
-	"github.com/chingiz/mobwiz/internal/config"
 	"io/fs"
 	"path/filepath"
+
+	"github.com/chingiz/mobwiz/internal/config"
 )
 
 // GenerateModule generates the files for a module based on configuration

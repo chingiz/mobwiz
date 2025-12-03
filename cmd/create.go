@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+
 	"github.com/chingiz/mobwiz/internal/config"
 	"github.com/chingiz/mobwiz/internal/generator"
 	"github.com/chingiz/mobwiz/internal/prompt"

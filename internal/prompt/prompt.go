@@ -2,10 +2,11 @@ package prompt
 
 import (
 	"errors"
+	"io/fs"
+
 	"github.com/chingiz/mobwiz/internal/config"
 	"github.com/chingiz/mobwiz/internal/generator"
 	"github.com/manifoldco/promptui"
-	"io/fs"
 )
 
 // RunInteractiveFlow gathers user input for module creation

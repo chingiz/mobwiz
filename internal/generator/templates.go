@@ -2,11 +2,12 @@ package generator
 
 import (
 	"fmt"
-	"gopkg.in/yaml.v3"
 	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"gopkg.in/yaml.v3"
 )
 
 // TemplateConfig represents the structure of templates.yaml

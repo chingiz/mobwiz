@@ -3,12 +3,13 @@ package generator
 import (
 	"bytes"
 	"fmt"
-	"github.com/Masterminds/sprig/v3"
-	"github.com/chingiz/mobwiz/internal/config"
 	"os"
 	"path/filepath"
 	"strings"
 	"text/template"
+
+	"github.com/Masterminds/sprig/v3"
+	"github.com/chingiz/mobwiz/internal/config"
 )
 
 // Engine handles template rendering
